@@ -3,7 +3,7 @@
 演示地址： http://www.gaoshiyi.top
 
 #### springboot后端代码
-https://github.com/yupeishan/JingdongH5.git
+https://gitee.com/peishanyu/jingdongH5.git
 ## Project setup
 ```
 npm install
