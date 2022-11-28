@@ -1,5 +1,9 @@
-# jingdong
+# jingdongH5-vue
+#### 仿京东到家H5前端
+演示地址： http://www.gaoshiyi.top
 
+#### springboot后端代码
+https://github.com/yupeishan/JingdongH5.git
 ## Project setup
 ```
 npm install
