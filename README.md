@@ -3,7 +3,7 @@
 建议使用微信扫下方二维码打开 浏览器无法使用微信授权登录  
 演示地址： http://www.gaoshiyi.top
 
-<img src="C:\Users\10741\OneDrive\桌面\jingdong\src\assets\qrCode.png"/>
+<img src="https://github.com/yupeishan/jingdongH5-vue/blob/master/src/assets/qrCode.png"/>
 
 #### springboot后端代码
 github:https://gitee.com/peishanyu/jingdongH5.git  
