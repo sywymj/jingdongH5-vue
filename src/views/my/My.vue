@@ -8,8 +8,7 @@
       <div class="person__info">
         <!-- 有头像则显示头像 -->
         <div class="person__info__avatar" v-if="userInfo.headPortrait">
-          <input type="file" />
-          <img :src="userInfo.headPortrait" />
+          <img :src="userInfo.headPortrait" alt="头像加载失败" />
         </div>
         <!-- 没有就显示默认 -->
         <div class="person__info__avatar" v-else>
