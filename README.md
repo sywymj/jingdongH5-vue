@@ -19,7 +19,7 @@
 - scss
 
 #### 项目地址
-github:https://github.com/yupeishan/jingdongH5-vue.git
+github:https://github.com/yupeishan/jingdongH5-vue.git  
 gitee: https://gitee.com/peishanyu/jingdongH5-vue.git
 
 #### springboot后端代码地址
