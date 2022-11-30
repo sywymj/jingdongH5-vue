@@ -36,7 +36,11 @@
               v-html="item.check ? '&#xe608;' : '&#xe8bb;'"
               @click="() => changeCartItemChecked(shopId, item.id)"
             ></div>
-            <img class="product__item__img" :src="item.imgUrl" />
+            <img
+              class="product__item__img"
+              :src="item.imgUrl"
+              alt="图片加载失败"
+            />
             <div class="product__item__detail">
               <h4 class="product__item__title">{{ item.name }}</h4>
               <p class="product__item__price">
@@ -74,9 +78,10 @@
       <div class="check">
         <div class="check__icon">
           <img
-            src="http://images.gaoshiyi.top/static/basket.png"
+            src="https://images.gaoshiyi.top/static/basket.png"
             class="check__icon__img"
             @click="handleCartShowChange"
+            alt="图片加载失败"
           />
           <div class="check__icon__tag">{{ calculations.total }}</div>
         </div>
@@ -99,7 +104,7 @@
 import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { useCommonCartEffect } from "../../effects/CartEffects";
+import { useCommonCartEffect } from "@/effects/CartEffects";
 
 // 获取购物车信息逻辑
 const useCartEffect = (shopId) => {

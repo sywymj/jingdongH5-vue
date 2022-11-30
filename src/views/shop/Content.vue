@@ -48,7 +48,11 @@
               :key="product.id"
             >
               <div class="product__item">
-                <img class="product__item__img" :src="product.imgUrl" />
+                <img
+                  class="product__item__img"
+                  :src="product.imgUrl"
+                  alt="图片加载失败"
+                />
 
                 <div class="product__item__detail">
                   <h4 class="product__item__title">{{ product.name }}</h4>
@@ -118,14 +122,14 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import request from "../../utils/request";
-import { useCommonCartEffect } from "../../effects/CartEffects";
+import { useCommonCartEffect } from "@/effects/CartEffects";
 
 //获取店铺全部分类及全部商品
 const useShopContentListEffect = (shopId) => {
   const shopContentList = ref({});
   const getShopContentList = async (handleTabClick) => {
     const result = await request.get(`/product/shop/${shopId}`);
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       shopContentList.value = result.data;
     }
     //请求完毕后 调用1次点击方法 展示初始数据
@@ -146,13 +150,13 @@ const useTabEffect = (shopContentList) => {
     currentTabId.value = id;
     //清空数组之前的内容 防止重复
     currentList.value.length = 0;
-    if (currentTabId.value == 0) {
+    if (currentTabId.value === 0) {
       for (let index = 0; index < shopContentList.value.length; index++) {
         currentList.value.push(shopContentList.value[index]);
       }
     } else {
       for (let index = 0; index < shopContentList.value.length; index++) {
-        if (id == shopContentList.value[index].id) {
+        if (id === shopContentList.value[index].id) {
           currentList.value.push(shopContentList.value[index]);
         }
       }

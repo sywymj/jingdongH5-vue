@@ -7,7 +7,7 @@
         <div class="title__content__info">{{ cateName }}</div>
       </div>
     </div>
-    <div class="message" v-if="Object.keys(shopList).length == 0">
+    <div class="message" v-if="Object.keys(shopList).length === 0">
       当前分类下暂无店铺
     </div>
     <div class="nearby">
@@ -34,7 +34,7 @@ const useShopListEffect = (cateId) => {
   const shopList = ref([]);
   const getShopList = async () => {
     const result = await request.get("/home/category/shop/" + cateId);
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       shopList.value = result.data;
     }
   };

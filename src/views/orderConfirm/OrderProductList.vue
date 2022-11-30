@@ -10,7 +10,11 @@
           :key="item.id"
           class="products__item"
         >
-          <img class="products__item__img" :src="item.imgUrl" />
+          <img
+            class="products__item__img"
+            :src="item.imgUrl"
+            alt="图片加载失败"
+          />
           <div class="products__item__detail">
             <h4 class="products__item__title">{{ item.name }}</h4>
             <p class="products__item__price">
@@ -33,10 +37,10 @@
 
 <script>
 import { useRoute } from "vue-router";
-import { useCommonCartEffect } from "../../effects/CartEffects";
+import { useCommonCartEffect } from "@/effects/CartEffects";
 import OrderSubmit from "./OrderSubmit";
 
-const usetotalPriceEffect = (productList) => {
+const useTotalPriceEffect = (productList) => {
   //求总价
   let totalPrice = 0;
   let orderProductList = [];
@@ -58,7 +62,7 @@ export default {
     const route = useRoute();
     const shopId = route.params.shopId;
     const { shopName, productList } = useCommonCartEffect(shopId);
-    const { totalPrice, orderProductList } = usetotalPriceEffect(productList);
+    const { totalPrice, orderProductList } = useTotalPriceEffect(productList);
 
     return {
       shopName,

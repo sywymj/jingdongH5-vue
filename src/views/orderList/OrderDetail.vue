@@ -26,7 +26,11 @@
           :key="detailId"
         >
           <div class="products__item">
-            <img class="products__item__img" :src="detail.imgUrl" />
+            <img
+              class="products__item__img"
+              :src="detail.imgUrl"
+              alt="图片加载失败"
+            />
             <div class="products__item__detail">
               <h4 class="products__item__title">{{ detail.name }}</h4>
               <p class="products__item__price">
@@ -71,7 +75,7 @@
           <div class="detail-info">
             <div class="detail-info-title">支付状态</div>
             <span class="detail-info-content">{{
-              order.payState == 1 ? "已支付" : "未支付"
+              order.payState === 1 ? "已支付" : "未支付"
             }}</span>
           </div>
           <div class="detail-info">
@@ -98,7 +102,7 @@
           <button
             type="button"
             class="operation"
-            v-if="order.orderState == 0"
+            v-if="order.orderState === 0"
             @click="handleOrderClick('cancel', order)"
           >
             取消订单
@@ -106,7 +110,7 @@
           <button
             type="button"
             class="operation"
-            v-if="order.orderState == 0"
+            v-if="order.orderState === 0"
             @click="handleOrderClick('pay', order)"
           >
             支付订单
@@ -115,7 +119,7 @@
           <button
             type="button"
             class="operation"
-            v-if="order.orderState == 3"
+            v-if="order.orderState === 3"
             @click="handleOrderClick('refund', order)"
           >
             退款
@@ -124,7 +128,7 @@
           <button
             type="button"
             class="operation"
-            v-if="order.orderState == 5"
+            v-if="order.orderState === 5"
             @click="handleOrderClick('finish', order)"
           >
             确认收货
@@ -133,7 +137,7 @@
           <button
             type="button"
             class="operation"
-            v-if="order.orderState == 6"
+            v-if="order.orderState === 6"
             @click="handleOrderClick('rating', order)"
           >
             评价
@@ -152,7 +156,7 @@ import request from "../../utils/request";
 import { useRoute, useRouter } from "vue-router";
 import Toast, { useToastEffect } from "../../components/Toast";
 
-const useOrderStateffect = () => {
+const useOrderStateEffect = () => {
   const router = useRouter();
 
   const handleBackClick = () => {
@@ -193,7 +197,7 @@ const orderButtonEffect = (showToast, userInfo) => {
               orderNumber: item.orderNumber,
               openId: userInfo.openId,
             });
-            if (result.message == "success" && result.code == 0) {
+            if (result.message === "success" && result.code === 0) {
               //支付成功 改变订单状态为已支付
               item.orderState = result.data.orderState;
               showToast("支付订单成功");
@@ -211,7 +215,7 @@ const orderButtonEffect = (showToast, userInfo) => {
             const result = await request.post("/user/order/cancel", {
               orderNumber: item.orderNumber,
             });
-            if (result.message == "success" && result.code == 0) {
+            if (result.message === "success" && result.code === 0) {
               //取消成功 改变订单状态为已取消
               item.orderState = result.data.orderState;
               showToast("取消订单成功");
@@ -229,7 +233,7 @@ const orderButtonEffect = (showToast, userInfo) => {
             const result = await request.post("/user/order/finish", {
               orderNumber: item.orderNumber,
             });
-            if (result.message == "success" && result.code == 0) {
+            if (result.message === "success" && result.code === 0) {
               //取消成功 改变订单状态为已完成
               item.orderState = result.data.orderState;
               showToast("订单已完成");
@@ -251,7 +255,7 @@ const orderButtonEffect = (showToast, userInfo) => {
               orderNumber: item.orderNumber,
               openId: userInfo.openId,
             });
-            if (result.message == "success" && result.code == 0) {
+            if (result.message === "success" && result.code === 0) {
               //退款成功 改变订单状态为已完成
               item.orderState = result.data.orderState;
               showToast("退款成功,款项受理中");
@@ -277,7 +281,7 @@ export default {
     const userInfo = JSON.parse(localStorage.userInfo);
     const { show, toastMessage, showToast } = useToastEffect();
     const { handleOrderClick } = orderButtonEffect(showToast, userInfo);
-    const { handleBackClick, orderStateEnum } = useOrderStateffect();
+    const { handleBackClick, orderStateEnum } = useOrderStateEffect();
     return {
       order,
       handleOrderClick,

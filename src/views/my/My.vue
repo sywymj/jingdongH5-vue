@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="bg"></div>
     <div class="person_edit" @click="handleEditClick">
-      <img src="../../assets/editor.png" />
+      <img src="../../assets/editor.png" alt="图片加载失败" />
     </div>
     <div class="person">
       <div class="person__info">
@@ -12,7 +12,10 @@
         </div>
         <!-- 没有就显示默认 -->
         <div class="person__info__avatar" v-else>
-          <img src="http://images.gaoshiyi.top/static/user.png" />
+          <img
+            src="https://images.gaoshiyi.top/static/user.png"
+            alt="图片加载失败"
+          />
         </div>
         <div class="person__info__title">
           <div class="person__info__title__nick">
@@ -41,7 +44,7 @@
       <div class="person__menu">
         <div class="person__menu__list" @click="handleRouteClick('address')">
           <div class="person__menu__list__con">
-            <div><img src="../../assets/address.png" /></div>
+            <div><img src="../../assets/address.png" alt="图片加载失败" /></div>
             <p>我的地址</p>
           </div>
           <div class="person__menu__list__more iconfont">&#xe6f2;</div>
@@ -51,14 +54,16 @@
           @click="handleRouteClick('editPassword')"
         >
           <div class="person__menu__list__con">
-            <div><img src="../../assets/editPassword.png" /></div>
+            <div>
+              <img src="../../assets/editPassword.png" alt="图片加载失败" />
+            </div>
             <p>修改密码</p>
           </div>
           <div class="person__menu__list__more iconfont">&#xe6f2;</div>
         </div>
         <div class="person__menu__list" @click="handleRouteClick('wechatAuth')">
           <div class="person__menu__list__con">
-            <div><img src="../../assets/wechat.png" /></div>
+            <div><img src="../../assets/wechat.png" alt="图片加载失败" /></div>
             <p>绑定微信</p>
           </div>
           <div class="person__menu__list__more iconfont">&#xe6f2;</div>
@@ -93,7 +98,7 @@ const useMyEffect = (showToast, userInfo) => {
         router.push({ name: "EditPassword" });
         break;
       case "wechatAuth":
-        if (userInfo.openId != null && userInfo.openId != undefined) {
+        if (userInfo.openId != null) {
           showToast("该用户已绑定微信账号");
           return;
         }
@@ -281,7 +286,6 @@ export default {
 .logout {
   margin: 1rem 0.1rem;
   height: 0.5rem;
-  line-height: 0.32rem;
   background: #0091ff;
   color: white;
   font-size: 0.2rem;
