@@ -2,7 +2,8 @@
   <div class="wrapper">
     <img
       class="wrapper__img"
-      src="http://images.gaoshiyi.top/static/user.png"
+      src="https://images.gaoshiyi.top/static/user.png"
+      alt="图片加载失败"
     />
     <div class="wrapper__login-button" @click="handleWeChatLogin">
       微信授权登录
@@ -65,7 +66,7 @@ export default {
     background: #f9f9f9;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    border-radius: 6px;
+
     &__content {
       margin-top: 0.12rem;
       line-height: 0.22rem;
@@ -85,7 +86,6 @@ export default {
     line-height: 0.48rem;
     background: #0091ff;
     box-shadow: 0 0.04rem 0.08rem 0 rgba(0, 145, 255, 0.32);
-    border-radius: 0.04rem;
     border-radius: 0.04rem;
     color: #fff;
     font-size: 0.16rem;

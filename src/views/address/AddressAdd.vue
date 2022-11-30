@@ -71,10 +71,10 @@ const useAddressEffect = (showToast) => {
 
   // v-model表单数据双向绑定
   let data = reactive({
-    area,
-    detailedAddress,
-    consigneeName,
-    tel,
+    area: "",
+    detailedAddress: "",
+    consigneeName: "",
+    tel: "",
     isDefault: false,
   });
 
@@ -85,9 +85,9 @@ const useAddressEffect = (showToast) => {
       tel: data.tel,
       area: data.area,
       detailedAddress: data.detailedAddress,
-      isDefault: data.isDefault == true ? "1" : "0",
+      isDefault: data.isDefault === true ? "1" : "0",
     });
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       router.back();
     } else {
       showToast(result.message);
@@ -235,7 +235,6 @@ export default {
 .save {
   margin: 0.3rem 0.1rem;
   height: 0.5rem;
-  line-height: 0.32rem;
   background: #0091ff;
   color: white;
   font-size: 0.2rem;

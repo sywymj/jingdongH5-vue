@@ -1,8 +1,8 @@
 import axios from "axios";
 import qs from "qs";
 
-axios.defaults.baseURL = "https://shop.gaoshiyi.top"; //服务器后端项目请求地址
-// axios.defaults.baseURL = "http://192.168.1.12:8080"; //本地请求地址
+// axios.defaults.baseURL = "https://shop.gaoshiyi.top"; //服务器后端项目请求地址
+axios.defaults.baseURL = "http://192.168.1.12:8080/jingdong"; //本地请求地址
 // axios.defaults.baseURL = 'http://qiaomai.natapp4.cc/jingdong' //内网穿透
 
 //post请求头
@@ -24,7 +24,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    if (response.status == 200) {
+    if (response.status === 200) {
       return Promise.resolve(response);
     } else {
       return Promise.reject(response);

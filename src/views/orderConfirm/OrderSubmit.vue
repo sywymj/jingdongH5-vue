@@ -4,9 +4,7 @@
       <div class="order__price">
         实付金额 <b>¥{{ totalPrice }}</b>
       </div>
-      <div class="order__btn" @click.once="() => handlePlaceOrder()">
-        提交订单
-      </div>
+      <div class="order__btn" @click.once="handlePlaceOrder">提交订单</div>
     </div>
     <div class="mask" v-show="showConfirm">
       <div class="mask__content">
@@ -15,13 +13,13 @@
         <div class="mask__content__btns">
           <div
             class="mask__content__btn mask__content__btn--first"
-            @click="() => handleConfirmPay(false)"
+            @click="() => handleConfirmPay(false, order.value)"
           >
             取消支付
           </div>
           <div
             class="mask__content__btn mask__content__btn--last"
-            @click="() => handleConfirmPay(true, order)"
+            @click="() => handleConfirmPay(true, order.value)"
           >
             确认支付
           </div>
@@ -38,7 +36,7 @@ import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import request from "../../utils/request";
 import Toast, { useToastEffect } from "../../components/Toast";
-import { useCommonCartEffect } from "../../effects/CartEffects";
+import { useCommonCartEffect } from "@/effects/CartEffects";
 
 // 下单相关逻辑
 const useCreateOrderEffect = (shopId, shopName, productList, showToast) => {
@@ -46,18 +44,15 @@ const useCreateOrderEffect = (shopId, shopName, productList, showToast) => {
 
   //获取用户信息
   const userInfo = JSON.parse(localStorage.userInfo);
-  //获取选择的地址信息
-  const address =
-    localStorage.getItem("address") != ""
-      ? JSON.parse(localStorage.getItem("address"))
-      : "";
-  let order = reactive({});
-  let showConfirm = ref(false);
+  //用于存储下单成功后的订单信息 支付点击事件中需抛送订单信息
+  const order = reactive({});
+  //是否显示支付页面 初始为false 下单成功后设为true
+  const showConfirm = ref(false);
 
   //提交订单
   const handlePlaceOrder = async () => {
-    //判断用户是否绑定微信 否则无法下单及支付
-    if (userInfo.openId == null && userInfo.openId == undefined) {
+    //判断用户是否绑定微信 否则无法下单及支付 下单需要依赖openId
+    if (userInfo.openId == null && userInfo.openId === undefined) {
       showToast("用户信息不全 请先绑定微信");
       return;
     }
@@ -70,6 +65,12 @@ const useCreateOrderEffect = (shopId, shopName, productList, showToast) => {
         quantity: product.count,
       });
     }
+    //获取用户选择的地址
+    const address =
+      localStorage.getItem("address") !== ""
+        ? JSON.parse(localStorage.getItem("address"))
+        : "";
+    //向后端下单
     try {
       const result = await request.post("/user/order/create", {
         userId: userInfo.id,
@@ -81,9 +82,10 @@ const useCreateOrderEffect = (shopId, shopName, productList, showToast) => {
         shopName: shopName.value,
         products: JSON.stringify(products),
       });
-      if (result.message == "success" && result.code == 0) {
+      if (result.message === "success" && result.code === 0) {
         //创建订单成功，要清除购物车数据
         store.commit("clearCartData", shopId);
+        //赋值订单信息
         order.value = result.data;
         //更改showConfirm值为true 弹出支付确认页面
         showConfirm.value = true;
@@ -103,16 +105,16 @@ const useShowMaskEffect = (showToast) => {
   const router = useRouter();
 
   const handleConfirmPay = async (boolean, order) => {
-    if (boolean == false) {
+    if (boolean === false) {
       //如果为false 取消支付 直接跳转订单页面
-      router.push({ name: "OrderList" });
+      await router.push({ name: "OrderList" });
     }
     const result = await request.post("/user/order/pay", {
-      orderNumber: order.value.orderNumber,
-      openId: order.value.userOpenId,
+      orderNumber: order.orderNumber,
+      openId: order.userOpenId,
     });
-    if (result.message == "success" && result.code == 0) {
-      router.push({ name: "OrderList" });
+    if (result.message === "success" && result.code === 0) {
+      await router.push({ name: "OrderList" });
     } else {
       showToast(result.message);
     }

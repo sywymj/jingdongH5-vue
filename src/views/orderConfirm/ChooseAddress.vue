@@ -44,7 +44,7 @@ const useAddressEffect = () => {
   //跳转地址页面 选择收货地址
   const handleAddressClick = () => {
     //设置锚点chooseAddress 表明用户是从订单页面而来选择地址
-    localStorage.setItem("chooseAddress", true);
+    localStorage.setItem("chooseAddress", "true");
     router.push({ name: "Address" });
   };
 
@@ -56,18 +56,18 @@ const useAddressEffect = () => {
   const handleItemClick = async () => {
     //获取地址页面传过来的用户选择的收货地址
     const orderAddress =
-      localStorage.getItem("address") != ""
+      localStorage.getItem("address") !== ""
         ? JSON.parse(localStorage.getItem("address"))
         : "";
 
-    if (orderAddress != "") {
+    if (orderAddress !== "") {
       //如果orderAddress不为空 说明有点击选择地址的操作 使用地址页面传过来的地址orderAddress
       address.value = orderAddress;
     } else {
       //orderAddress为空 未选择 异步获取用户默认地址
       const result = await request.get("/user/address/default/" + userInfo.id);
-      if (result.message == "success" && result.code == 0) {
-        //保存用户信息
+      if (result.message === "success" && result.code === 0) {
+        //保存用户地址信息
         address.value = result.data;
       } else {
         address.value = "";

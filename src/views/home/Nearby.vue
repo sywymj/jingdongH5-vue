@@ -33,7 +33,7 @@ const useNearbyListEffect = (showToast) => {
       page: page.value,
       size: size,
     });
-    if (result.message == "success" && result.data.length > 0) {
+    if (result.message === "success" && result.data.length > 0) {
       nearbyList.value = [...nearbyList.value, ...result.data];
       if (result.data.length >= size && page.value >= 2) {
         showToast("加载更多...");

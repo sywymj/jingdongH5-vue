@@ -16,7 +16,11 @@
           :key="item.id"
         >
           <div class="products__item">
-            <img class="products__item__img" :src="item.imgUrl" />
+            <img
+              class="products__item__img"
+              :src="item.imgUrl"
+              alt="图片加载失败"
+            />
             <div class="products__item__detail">
               <h4 class="products__item__title">{{ item.name }}</h4>
               <p class="products__item__price">
@@ -176,7 +180,7 @@ export default {
       background-color: $btn-bgColor;
       color: $bgColor;
       padding: 0.01rem 0.05rem;
-      border-radius: 0rem 0.1rem 0.1rem 0rem;
+      border-radius: 0 0.1rem 0.1rem 0;
       a {
         color: #fff;
         text-decoration: none;

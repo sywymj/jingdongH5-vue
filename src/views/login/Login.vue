@@ -2,7 +2,8 @@
   <div class="wrapper">
     <img
       class="wrapper__img"
-      src="http://images.gaoshiyi.top/static/user.png"
+      src="https://images.gaoshiyi.top/static/user.png"
+      alt="图片加载失败"
     />
     <div class="wrapper__input">
       <input
@@ -42,11 +43,11 @@ const useLoginEffect = (showToast) => {
         username: data.username,
         password: data.password,
       });
-      if (result.message == "success" && result.code == 0) {
+      if (result.message === "success" && result.code === 0) {
         //保存用户信息及登陆状态
         localStorage.userInfo = JSON.stringify(result.data);
         localStorage.isLogin = true;
-        router.push({ name: "Home" });
+        await router.push({ name: "Home" });
       } else {
         showToast(result.message);
       }
@@ -109,7 +110,7 @@ export default {
     background: #f9f9f9;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    border-radius: 6px;
+
     &__content {
       margin-top: 0.12rem;
       line-height: 0.22rem;
@@ -129,7 +130,6 @@ export default {
     line-height: 0.48rem;
     background: #0091ff;
     box-shadow: 0 0.04rem 0.08rem 0 rgba(0, 145, 255, 0.32);
-    border-radius: 0.04rem;
     border-radius: 0.04rem;
     color: #fff;
     font-size: 0.16rem;

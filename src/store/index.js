@@ -6,14 +6,14 @@ const setLocalCartList = (state) => {
   localStorage.setItem("cartList", cartListString);
 };
 
-const getLocaCartList = () => {
+const getLocalCartList = () => {
   return JSON.parse(localStorage.getItem("cartList")) || {};
 };
 
 export default createStore({
   state: {
     //定义data数据
-    cartList: getLocaCartList(),
+    cartList: getLocalCartList(),
   },
   mutations: {
     //同步的方法

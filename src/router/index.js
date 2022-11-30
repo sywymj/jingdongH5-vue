@@ -182,7 +182,7 @@ router.beforeEach((to, from, next) => {
     "ShopList",
   ];
   //有返回值则为true 表示不需要登录 否则为false 需要登录
-  const flag = list.indexOf(name) != -1;
+  const flag = list.indexOf(name) !== -1;
 
   // //next()表示继续执行，声明参数表示继续执行指定路径
   isLogin || flag ? next() : next({ name: "LoginMethod" });

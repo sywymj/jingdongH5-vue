@@ -71,7 +71,7 @@ const useAddressEffect = (showToast) => {
   let address = JSON.parse(route.params.address);
   //获取用户缓存信息
   let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  if (address.userId != userInfo.id) {
+  if (address.userId !== userInfo.id) {
     return;
   }
   //保存地址信息
@@ -80,7 +80,7 @@ const useAddressEffect = (showToast) => {
     detailedAddress: address.detailedAddress,
     consigneeName: address.consigneeName,
     tel: address.tel,
-    isDefault: address.isDefault == 1,
+    isDefault: address.isDefault === 1,
   });
 
   const handleSaveClick = async () => {
@@ -91,9 +91,9 @@ const useAddressEffect = (showToast) => {
       tel: data.tel,
       area: data.area,
       detailedAddress: data.detailedAddress,
-      isDefault: data.isDefault == true ? "1" : "0",
+      isDefault: data.isDefault === true ? "1" : "0",
     });
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       router.back();
     } else {
       showToast(result.message);
@@ -104,7 +104,7 @@ const useAddressEffect = (showToast) => {
     const result = await request.post("/user/address/delete/" + userInfo.id, {
       id: address.id,
     });
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       router.back();
     } else {
       showToast(result.message);
@@ -256,7 +256,6 @@ export default {
 .save {
   margin: 0.3rem 0.1rem;
   height: 0.5rem;
-  line-height: 0.32rem;
   background: #0091ff;
   color: white;
   font-size: 0.2rem;

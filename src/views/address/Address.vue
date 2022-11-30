@@ -7,7 +7,7 @@
         <div class="title__content__more" @click="handleAddClick">新建</div>
       </div>
     </div>
-    <div class="message" v-if="Object.keys(itemList).length == 0">
+    <div class="message" v-if="Object.keys(itemList).length === 0">
       暂无收货地址
     </div>
     <div class="address">
@@ -19,7 +19,7 @@
       >
         <div class="address__content__main">
           <div class="address__content__main__title">
-            <div class="defaultAddress iconfont" v-if="item.isDefault == 1">
+            <div class="defaultAddress iconfont" v-if="item.isDefault === 1">
               &#xe614;
             </div>
             <div class="nickname">{{ item.consigneeName }}</div>
@@ -60,7 +60,7 @@ const useAddressEffect = (showToast) => {
   };
 
   const handleSaveClick = (item) => {
-    if (chooseOrderAddress == "true") {
+    if (chooseOrderAddress === "true") {
       //chooseOrderAddress为true 说明用户是在订单页面点击跳转 选择订单地址
       //保存用户选择的地址 跳回下单页面
       localStorage.setItem("address", JSON.stringify(item));
@@ -82,7 +82,7 @@ const useAddressEffect = (showToast) => {
   let itemList = ref([]);
   const handleListClick = async () => {
     const result = await request.get("/user/address/all/" + userInfo.id);
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       itemList.value = result.data;
     } else {
       showToast(result.message);

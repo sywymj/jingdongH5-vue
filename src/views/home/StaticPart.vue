@@ -13,7 +13,8 @@
   <div class="banner">
     <img
       class="banner__img"
-      src="http://images.gaoshiyi.top/static/banner.jpg"
+      src="https://images.gaoshiyi.top/static/banner.jpg"
+      alt="图片加载失败"
     />
   </div>
   <!-- nav -->
@@ -24,7 +25,7 @@
       :key="item.id"
       @click="handleClick(item)"
     >
-      <img class="icons__item__img" :src="item.imgUrl" />
+      <img class="icons__item__img" :src="item.imgUrl" alt="" />
       <p class="icons__item__desc">{{ item.name }}</p>
     </div>
   </div>
@@ -40,7 +41,7 @@ const useCategoryEffect = () => {
   const categories = ref([]);
   const getCategories = async () => {
     const result = await request.get("/home/categories");
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       categories.value = result.data;
     }
   };

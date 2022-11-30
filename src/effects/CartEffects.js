@@ -37,8 +37,7 @@ export const useCommonCartEffect = (shopId) => {
   });
 
   const shopName = computed(() => {
-    const shopName = cartList[shopId]?.shopName || "";
-    return shopName;
+    return cartList[shopId]?.shopName || "";
   });
 
   const calculations = computed(() => {

@@ -57,7 +57,7 @@ const useUserInfoEffect = (showToast) => {
 
   const handleSaveClick = async () => {
     //先验证密码是否一致
-    if (data.password != data.rePassword) {
+    if (data.password !== data.rePassword) {
       showToast("重复密码不一致");
       return;
     }
@@ -72,8 +72,8 @@ const useUserInfoEffect = (showToast) => {
       rePassword: data.rePassword,
     });
 
-    if (result.message == "success" && result.code == 0) {
-      router.push({ name: "My" });
+    if (result.message === "success" && result.code === 0) {
+      await router.push({ name: "My" });
     } else {
       showToast(result.message);
     }
@@ -182,7 +182,6 @@ export default {
 .save {
   margin: 0.3rem 0.1rem;
   height: 0.5rem;
-  line-height: 0.32rem;
   background: #0091ff;
   color: white;
   font-size: 0.2rem;

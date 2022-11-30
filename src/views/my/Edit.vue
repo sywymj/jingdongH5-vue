@@ -31,7 +31,7 @@ import { useRouter } from "vue-router";
 import request from "../../utils/request";
 import Toast, { useToastEffect } from "../../components/Toast";
 
-const useuserinfoEffect = (showToast) => {
+const useUserInfoEffect = (showToast) => {
   const router = useRouter();
   const handleBackClick = () => {
     router.back();
@@ -53,10 +53,10 @@ const useuserinfoEffect = (showToast) => {
       tel: data.tel,
     });
 
-    if (result.message == "success" && result.code == 0) {
+    if (result.message === "success" && result.code === 0) {
       //成功则保存用户信息
       localStorage.setItem("userInfo", JSON.stringify(result.data));
-      router.push({ name: "My" });
+      await router.push({ name: "My" });
     } else {
       showToast(result.message);
     }
@@ -78,7 +78,7 @@ export default {
   setup() {
     const { show, toastMessage, showToast } = useToastEffect();
     const { nickname, tel, handleBackClick, handleSaveClick } =
-      useuserinfoEffect(showToast);
+      useUserInfoEffect(showToast);
     return {
       nickname,
       tel,
@@ -158,7 +158,6 @@ export default {
 .save {
   margin: 0.3rem 0.1rem;
   height: 0.5rem;
-  line-height: 0.32rem;
   background: #0091ff;
   color: white;
   font-size: 0.2rem;
